@@ -6,6 +6,7 @@ import RegisterFormPrivilegeInput from "./RegisterFormComponents/PrivilegeInput"
 import RegisterFormPasswordInput from "./RegisterFormComponents/PasswordInput";
 import axios from "axios";
 import { RegisterFormDataParser } from "./functions/RegisterFormDataParser";
+import { useNavigate } from "@remix-run/react";
 
 
 
@@ -15,6 +16,8 @@ interface RegisterFormProps {
 }
 
 export default function RegisterForm({setUserExits, setRegisterSuccess}: RegisterFormProps) {
+    const navigate = useNavigate()
+    
     function validRole(selectedRoles: string[]) {
         const roles: string[] = ['VIEWER', 'TRAINER', 'MANAGER', 'ADMIN']
         let valid: boolean = false
@@ -68,6 +71,7 @@ export default function RegisterForm({setUserExits, setRegisterSuccess}: Registe
             setRegisterSuccess(true)
             setTimeout(() => {
                 setRegisterSuccess(false)
+                navigate('/login')
             }, 2000)
         } catch (error: any) {
             if (error.status === 409) {
