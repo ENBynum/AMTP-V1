@@ -4,14 +4,14 @@ import { useState } from "react";
 import LoginForm from "~/components/Login/LoginForm";
 import LoginHeader from "~/components/Login/LoginHeader";
 import LoginNotifications from "~/components/Login/LoginNotifications";
-import LoginRegisterRedirect from "~/components/Login/LoginRegisterLink";
+import LoginRegisterLink from "~/components/Login/LoginRegisterLink";
 
 export const meta: MetaFunction = () => {
     return [
-      { title: "AMTP Management" },
-      { name: "description", content: "Login to AMTP Management!" },
-    ];
-  };
+        { title: "AMTP Management" },
+        { name: "description", content: "Login to AMTP Management!" },
+    ]
+}
 
 
 export default function LoginPage() {
@@ -43,9 +43,8 @@ export default function LoginPage() {
                         setLoginSuccess={setLoginSuccess}
                     />
                     <Divider/>
-                    <LoginRegisterRedirect/>
+                    <LoginRegisterLink/>
                 </Stack>
-                
             </Paper>
         </Center>
     )
