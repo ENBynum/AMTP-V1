@@ -1,12 +1,13 @@
 import { Button, Stack } from "@mantine/core";
-import { RegisterFormInterface, RegisterFormProvider, useRegisterForm } from "./context/registerFormContext";
+import { RegisterFormInterface, RegisterFormProvider, useRegisterForm } from "./context/RegisterFormContext";
 import RegisterFormDODIDInput from "./RegisterFormComponents/DODIDInput";
 import RegisterFormPersonalInfoInput from "./RegisterFormComponents/PersonalInfoInput";
 import RegisterFormPrivilegeInput from "./RegisterFormComponents/PrivilegeInput";
 import RegisterFormPasswordInput from "./RegisterFormComponents/PasswordInput";
 import axios from "axios";
-import { RegisterFormDataParser } from "./functions/RegisterFormDataParser";
+import { RegisterFormDataParser } from "~/utils/parsers.server";
 import { useNavigate } from "@remix-run/react";
+import { Roles } from "~/utils/variables.server";
 
 
 
@@ -19,11 +20,10 @@ export default function RegisterForm({setUserExits, setRegisterSuccess}: Registe
     const navigate = useNavigate()
     
     function validRole(selectedRoles: string[]) {
-        const roles: string[] = ['VIEWER', 'TRAINER', 'MANAGER', 'ADMIN']
         let valid: boolean = false
 
         selectedRoles.map((e: string) => {
-            roles.includes(e) ? valid = true : null
+            Roles.includes(e) ? valid = true : null
         })
 
         return valid
@@ -63,6 +63,7 @@ export default function RegisterForm({setUserExits, setRegisterSuccess}: Registe
 
     async function handleSubmit(data: RegisterFormInterface) {
         try {
+            // @ts-ignore
             const reqData = RegisterFormDataParser(data)
             const res = await axios.post(
                 'http://localhost:3000/api/auth/user/register',

@@ -1,5 +1,5 @@
 import { Grid, PasswordInput } from "@mantine/core";
-import { useRegisterForm } from "../context/registerFormContext";
+import { useRegisterForm } from "../context/RegisterFormContext";
 
 
 

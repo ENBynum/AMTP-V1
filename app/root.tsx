@@ -8,6 +8,7 @@ import {
   Scripts,
   ScrollRestoration,
 } from "@remix-run/react";
+import { AuthProvider } from "./components/_Config/context/AuthContext";
 
 export function Layout({ children }: { children: React.ReactNode }) {
   return (
@@ -20,7 +21,11 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <ColorSchemeScript defaultColorScheme={'auto'}/>
       </head>
       <body>
-        <MantineProvider>{children}</MantineProvider>
+        <MantineProvider>
+          <AuthProvider>
+            {children}
+          </AuthProvider>
+        </MantineProvider>
         <ScrollRestoration />
         <Scripts />
       </body>

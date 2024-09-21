@@ -1,5 +1,5 @@
 import { Grid, NumberInput } from "@mantine/core";
-import { useRegisterFormContext } from "../context/registerFormContext";
+import { useRegisterFormContext } from "../context/RegisterFormContext";
 
 
 

@@ -1,12 +1,11 @@
 import { Grid, Group, NumberInput, Select, Stack, Switch, TextInput } from "@mantine/core"
-import { useRegisterFormContext } from "../context/registerFormContext"
+import { useRegisterFormContext } from "../context/RegisterFormContext"
+import { Ranks } from "~/utils/variables.server"
 
 
 
 export default function RegisterFormPersonalInfoInput() {
     const form = useRegisterFormContext()
-
-    const ranks = ["PVT", "PV2", "PFC", "SPC", "CPL", "SGT", "SSG", "SFC"]
 
     function onNoMiddleToggle(event: { currentTarget: { checked: any } }) {
         const isChecked = event.currentTarget.checked
@@ -22,7 +21,7 @@ export default function RegisterFormPersonalInfoInput() {
                     <Select
                         w={'100%'}
                         label={'Rank'}
-                        data={ranks}
+                        data={Ranks}
                         required
                         error={form.errors.rank}
                         key={form.key('rank')}

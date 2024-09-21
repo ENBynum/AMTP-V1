@@ -1,13 +1,8 @@
-import { UserProfile } from "~/components/_Config/types/User";
-import { RegisterFormInterface } from "../context/registerFormContext";
+import { RegisterData, UserCredentials, UserProfile } from "./types.server"
 
-export function RegisterFormDataParser(data: RegisterFormInterface) {
-    interface UserCredentials {
-        dodid: number,
-        username: string,
-        password: string
-    }
-    
+
+
+export function RegisterFormDataParser(data: RegisterData) {
     const {
         dodid, rank, last, first, middle, noMiddle, company,
         companyAccess, password
@@ -26,15 +21,13 @@ export function RegisterFormDataParser(data: RegisterFormInterface) {
         `${first}.${middle[0]}.${last}`.toLowerCase()
 
     
-    const user: UserCredentials = {
-        // @ts-ignore
+    const userCredentials: UserCredentials = {
         dodid, username, password
     }
     const userProfile: UserProfile = {
-        // @ts-ignore
         dodid, rank, name, signature, initials, company, role, 
-        evaluator
+        evaluator, companyAccess
     }
 
-    return {user, userProfile}
+    return {userCredentials, userProfile}
 }

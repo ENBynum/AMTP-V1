@@ -1,13 +1,10 @@
 import { Grid, MultiSelect, Select, Stack } from "@mantine/core";
-import { useRegisterFormContext } from "../context/registerFormContext";
-
+import { useRegisterFormContext } from "../context/RegisterFormContext";
+import { Companies, Roles } from "~/utils/variables.server";
 
 
 export default function RegisterFormPrivilegeInput() {
     const form = useRegisterFormContext()
-
-    const companies = ["ALPHA", "BRAVO", "CHARLIE", "DELTA", "FOXTROT", "GOLF"]
-    const roles = ['VIEWER', 'TRAINER', 'MANAGER', 'ADMIN']
 
     return (
         <Stack key={'PrivilegesInputs'} gap={'xs'}>
@@ -16,7 +13,7 @@ export default function RegisterFormPrivilegeInput() {
                     <Select
                         w={'100%'}
                             label={'Company'}
-                            data={companies}
+                            data={Companies}
                             required
                             error={form.errors.company}
                             key={form.key('company')}
@@ -28,7 +25,7 @@ export default function RegisterFormPrivilegeInput() {
                         w={'100%'}
                         label={'Roles'}
                         data={[
-                            {group: 'Roles', items: roles},
+                            {group: 'Roles', items: Roles},
                             {group: "Evaluator?", items: ['EVALUATOR']}
                         ]}
                         maxValues={2}
@@ -44,7 +41,7 @@ export default function RegisterFormPrivilegeInput() {
             <MultiSelect
                 w={'100%'}
                 label={'Company Access'}
-                data={companies}
+                data={Companies}
                 clearable
                 required
                 error={form.errors.companyAccess}

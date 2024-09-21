@@ -1,6 +1,7 @@
 import { Button, PasswordInput, Stack, TextInput } from "@mantine/core"
 import { useForm } from "@mantine/form"
 import axios from "axios"
+import { useAuth } from "../_Config/context/AuthContext"
 
 
 interface LoginFormProps {
@@ -10,6 +11,8 @@ interface LoginFormProps {
 }
 
 export default function LoginForm({setAccountDisabled, setInvalidCredentials, setLoginSuccess}: LoginFormProps) {
+    const auth = useAuth()
+    
     interface LoginForm {
         username: string,
         password: string
@@ -29,7 +32,10 @@ export default function LoginForm({setAccountDisabled, setInvalidCredentials, se
                 'http://localhost:3000/api/auth/user/login',
                 data
             )
-                setLoginSuccess(true)
+            const userData: {dodid: string, role: string} = res.data
+            // @ts-ignore
+            auth.Login(userData.dodid)
+            setLoginSuccess(true)
             setTimeout(() => {
                 setLoginSuccess(false)
             }, 2000)
